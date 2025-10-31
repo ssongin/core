@@ -4,16 +4,25 @@ import (
 	"os"
 )
 
-func CheckError(message string, err error) {
+func CheckWarn(message string, err error, args ...any) {
 	if err != nil {
-		GetLogger().Error(message, "error", err)
+		allArgs := append([]any{"error", err}, args...)
+		GetLogger().Warn(message, allArgs...)
+	}
+}
+
+func CheckError(message string, err error, args ...any) {
+	if err != nil {
+		allArgs := append([]any{"error", err}, args...)
+		GetLogger().Error(message, allArgs...)
 		panic(err)
 	}
 }
 
-func CheckFatalError(message string, err error) {
+func CheckFatalError(message string, err error, args ...any) {
 	if err != nil {
-		GetLogger().Error(message, "error", err)
+		allArgs := append([]any{"error", err}, args...)
+		GetLogger().Error(message, allArgs...)
 		os.Exit(1)
 	}
 }
