@@ -1,20 +1,19 @@
 package core
 
 import (
-	"log/slog"
 	"os"
 )
 
-func CheckError(message string, logger *slog.Logger, err error) {
+func CheckError(message string, err error) {
 	if err != nil {
-		logger.Error(message, "error", err)
+		GetLogger().Error(message, "error", err)
 		panic(err)
 	}
 }
 
-func CheckFatalError(message string, logger *slog.Logger, err error) {
+func CheckFatalError(message string, err error) {
 	if err != nil {
-		logger.Error(message, "error", err)
+		GetLogger().Error(message, "error", err)
 		os.Exit(1)
 	}
 }
